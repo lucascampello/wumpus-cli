@@ -30,20 +30,25 @@
 
             // Executa o Jogo (INICIO DAS FUNÇÕES DE -> jogo.php)
             $objJogo = new Jogo($mapa_escolhido);
+            $objJogo->jogar();
+            
 
-            var_dump($objJogo->objTabuleiro);
             // Coleta o Tempo de Execução Final do Algoritmo
             $tempoFinal = $objIOSistema->tempo();
             
             // Obtem o Tempo Real da Execução (Final - Inicial)
             $tempoExecucao[] = ($tempoFinal-$tempoInicial)/1000000000;
+            
         }
 
         // Obtem a Média do Tempo de Execução
-        $tempoMedio = ($tempoExecucao[0]+$tempoExecucao[1]+$tempoExecucao[2])/3;
+        $tempoMedio = array_sum($tempoExecucao)/3;
         
         // Escreve o Log
         $objIOSistema->escreverLog(($i+1)." {$tempoMedio}");
+
+        // ESCREVER O LOG
+        // $objJogo->logarJogada();
     }
     
     // Fecha o Arquivo de Log

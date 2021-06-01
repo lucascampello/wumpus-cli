@@ -16,6 +16,7 @@ define("FEDOR",3);
 define("FOSSO",4);
 define("BRISA",5);
 define("FEDOR_BRISA",7);
+define("WUMPUS_BRISA",8);
 define("OURO",10);
 define("OURO_FEDOR",13);
 define("OURO_BRISA",15);
@@ -25,8 +26,9 @@ define("JOGADOR", 99);
 define("TAMANHO_TABULEIRO", 16);
 define("POSICAO_INICIAL", 0);
 
-define("N_MAPAS", 3);
+define("N_MAPAS", 6);
 
 define("DIR_INC","includes\\");
 define("DIR_CLASS","classes\\");
 define("DIR_MAPAS","mapas\\");
+define("DIR_IMG","images\\");

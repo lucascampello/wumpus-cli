@@ -27,10 +27,10 @@ class IOSistema {
        $msg = "Erro:\n ";
        switch($mensagem):
            case POUCOS_PARAMETROS:
-               exit($msg . "Não foi informado na chamada o parâmetro <NÚMERO DE EXECUÇÕES>\n" . exemploChamada());
+               exit($msg . "Não foi informado na chamada o parâmetro <NÚMERO DE EXECUÇÕES>\n" . $this->exemploChamada());
                break;
            case PARAMETRO_NAO_INTEIRO:
-               exit($msg . "O parâmetro informado não é um número inteiro\n" . exemploChamada());
+               exit($msg . "O parâmetro informado não é um número inteiro\n" . $this->exemploChamada());
                break;
            case PARAMETRO_UNSIGNED:
                exit($msg . "O parâmetro informado deve ser positivo maior que zero!\n");
