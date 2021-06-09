@@ -32,16 +32,18 @@ https://github.com/DenysMenfredy/WumpusWorld
   - python3 main.py [-h] [--tamanho_mapa TAMANHO_MAPA] [--mapa_gerados MAPA_GERADOS] [--rodadas RODADAS] [--verbosity VERBOSITY] [--log LOG]
 
 optional arguments:
+
   -h, --help            show this help message and exit
-  --tamanho_mapa TAMANHO_MAPA, -tm TAMANHO_MAPA
-                        tamanho do mapa. Padrão:4
-  --mapa_gerados MAPA_GERADOS, -mg MAPA_GERADOS
-                        mapas gerados. Padrão:10
-  --rodadas RODADAS, -r RODADAS
-                        rodadas. Padrão:20
-  --verbosity VERBOSITY, -v VERBOSITY
-                        verbosity logging level (INFO=20 DEBUG=10)
-  --log LOG, -l LOG     arquivo de saída. Padrão:wumpus.txt
+  
+  --tamanho_mapa TAMANHO_MAPA, -tm TAMANHO_MAPA		tamanho do mapa. <b>Padrão: 4</b>
+  
+  --mapa_gerados MAPA_GERADOS, -mg MAPA_GERADOS		mapas gerados. <b>Padrão: 10</b>
+  
+  --rodadas RODADAS, -r RODADAS		rodadas. <b>Padrão: 20</b>
+  
+  --verbosity VERBOSITY, -v VERBOSITY	verbosity logging level (INFO=20 DEBUG=10)
+  
+  --log LOG, -l LOG     arquivo de saída. <b>Padrão: wumpus.txt</b>
 
 ### License
 BSD 2-Clause "Simplified" License
