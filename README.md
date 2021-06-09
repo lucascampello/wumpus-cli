@@ -15,10 +15,15 @@ https://github.com/DenysMenfredy/WumpusWorld
 # Dependências
   - python3
   - bibliotas do python: (requirements.txt)
+	
 	matplot>=0.1.9
+	
 	matplotlib>=3.3.4
+	
 	numpy>=1.20.1
+	
 	pyparsing>=2.4.7
+	
 	scipy>=1.6.0
 
 #### Características do Problema
