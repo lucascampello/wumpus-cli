@@ -1,2 +1,0 @@
-#Mundo Wumpus
-#n time_s_avg time_s_std
