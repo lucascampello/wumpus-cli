@@ -180,6 +180,8 @@ class Environment:
                 plt.plot(x,y,label = l)
             plt.title("Execução do Wumpus (Pontuação)")
             plt.legend(loc = "best")
+            plt.xlabel('Mapas Gerados (-mg)')
+            plt.ylabel('Pontuação do Agente')
             plt.grid(True)
         plt.tight_layout()
         plt.show()
