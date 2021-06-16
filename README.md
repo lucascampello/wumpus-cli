@@ -50,5 +50,10 @@ optional arguments:
   
   --log LOG, -l LOG     arquivo de saída. <b>Padrão: wumpus.txt</b>
 
+# Gráfico Resultante
+Gráfico da pontuação gerada pelos agentes na solução do problema, sendo que haverá um total de agentes de acordo com o parâmetro -r (RODADAS) e -tm (TAMANHO DO MAPA).
+Será plotado pela ordem da pontuação do melhor caso, apresentando o melhor e pior caso, além do caso médio.
+
+
 ### License
 BSD 2-Clause "Simplified" License
