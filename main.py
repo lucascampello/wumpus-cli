@@ -33,7 +33,9 @@ except ImportError as error:
 DEFAULT_SEED = None
 DEFAULT_TAMANHO_MAPA = 4
 DEFAULT_MAPAS_GERADOS = 10
-DEFAULT_TENTATIVA = 20
+DEFAULT_BURACOS = DEFAULT_TAMANHO_MAPA
+DEFAULT_RODADAS = 3
+DEFAULT_AGENTES = 1
 DEFAULT_OUTPUT = None #"alg_lab.png"
 DEFAULT_LOG = "wumpus.txt"
 
@@ -68,13 +70,18 @@ def main():
     help_msg = "tamanho do mapa. Padrão:{}".format(DEFAULT_TAMANHO_MAPA)
     parser.add_argument("--tamanho_mapa", "-tm", help=help_msg, default=DEFAULT_TAMANHO_MAPA, type=int)
 
-    # Números de Mapas Aleatórios (Padrão 4)
-    help_msg = "mapas gerados. Padrão:{}".format(DEFAULT_MAPAS_GERADOS)
-    parser.add_argument("--mapa_gerados", "-mg", help=help_msg, default=DEFAULT_MAPAS_GERADOS, type=int)
+    # Número de Buracos (Padrão TAMANHO DO MAPA -1)
+    help_msg = "buracos.        Padrão:{}".format(DEFAULT_BURACOS)
+    parser.add_argument("--buracos", "-b", help=help_msg, default=DEFAULT_BURACOS, type=int)
 
-    # Número de Tentativas (Padrão 20)
-    help_msg = "rodadas.        Padrão:{}".format(DEFAULT_TENTATIVA)
-    parser.add_argument("--rodadas", "-r", help=help_msg, default=DEFAULT_TENTATIVA, type=int)
+    # Número de Agentes (Padrão 1)
+    help_msg = "agentes.        Padrão:{}".format(DEFAULT_AGENTES)
+    parser.add_argument("--agentes", "-a", help=help_msg, default=DEFAULT_AGENTES, type=int)
+
+
+    # Número de Agentes (Padrão 1)
+    help_msg = "rodadas.        Padrão:{}".format(DEFAULT_RODADAS)
+    parser.add_argument("--rodadas", "-r", help=help_msg, default=DEFAULT_RODADAS, type=int)
 
     # Nível de  Saída (INFO | DEBUG)
     help_msg = "verbosity logging level (INFO=%d DEBUG=%d)" % (logging.INFO, logging.DEBUG)
@@ -101,9 +108,9 @@ def main():
     imprime_config(args)
 
     #Inicializa os Parâmetros do Jogo
-    tamanho = args.tamanho_mapa
-    mapas_gerados = args.mapa_gerados
-    n_rodadas = args.rodadas
+    #tamanho = args.tamanho_mapa
+    #buracos = args.buracos
+    #rodadas = args.rodadas
     size_chrom = 100
     pontuacao = [
         1000,  # Pegou Ouro
@@ -117,13 +124,15 @@ def main():
         -2,   # Fadiga
     ]
 
+    # Inicializo as variáveis de Controle do Jgoo
     efficience_calulation = EfficienceCalculation("wumpus")
-    # Define a Estrutura do Mapa (TANANHO DA MATRIX, NÚMERO DE BURACOS)
-    efficience_calulation.loadEnvironment(tamanho, tamanho-1)
+
     # Cria a estrutura de pontuação e inicializa os valores para o algoritmo
-    efficience_calulation.loadWeights(size_chrom,mapas_gerados+1,n_rodadas,pontuacao)
+    efficience_calulation.loadWeights(size_chrom,1,args.agentes,pontuacao)
+
     # roda
     efficience_calulation.runIterations(args)
+
     # Gera o mpy com os dados resultantes
     efficience_calulation.exportResults()
 

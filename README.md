@@ -1,59 +1,43 @@
-# Agentes Inteligente para Mundo do Wumpus
-# Sobre
-Trabalho de Análise e Complexidade Algorítmica - PPGES 2021/1
-Adaptação do Código  da disciplina de Inteligência Computacional da **Universidade Federal do Pará - Tucuruí**.
+# Intelligent Agents for the World of Wumpus
+## About
+This project is a work proposed in the computational intelligence discipline. Developed by computer engineering students at the **Federal University of Pará - Tucuruí**.
 
-## Criadores do Código Original adaptado:
+## Students:
 [@ **Denys Menfredy**](/DenysMenfredy)
 [@ **Jeremias Kalebe**](/jkalebe)
 [@ **Renuá Meireles**](/Renua-Meireles)
 [@ **Rodrigo Moraes**](/Driguss)
 
-## GitHub do Projeto Original
-https://github.com/DenysMenfredy/WumpusWorld
-
-# Dependências
-  - python3
-  - bibliotas do python: (requirements.txt)
-	
-	matplot>=0.1.9
-	
-	matplotlib>=3.3.4
-	
-	numpy>=1.20.1
-	
-	pyparsing>=2.4.7
-	
-	scipy>=1.6.0
-
-#### Características do Problema
-- Mapa de tamanho NxN;
-- N-1 Buracos;
+## Objectives
+- The main goal is to develop intelligent agents to act in the environment of World of Wumpus
+- Use a Genetic Algorithm (GA) as learning mechanism.
+#### Enviroment
+- NxN Size;
+- N-1 Pits;
 - 1 Wumpus;
-- 1 Ouro;
-- Objetivo do Agente é percorrer o mapa em busca do ouro, tomando decisões autônomas para não cair em nenhum buraco ou ser morto pelo wumpus, tentar matar o wumpus e voltar em segurança para o inicio do tabuleiro.
-
-# Exemplo de Execução
-  - python3 main.py [-h] [--tamanho_mapa TAMANHO_MAPA] [--mapa_gerados MAPA_GERADOS] [--rodadas RODADAS] [--verbosity VERBOSITY] [--log LOG]
-
-optional arguments:
-
-  -h, --help            show this help message and exit
-  
-  --tamanho_mapa TAMANHO_MAPA, -tm TAMANHO_MAPA		tamanho do mapa. <b>Padrão: 4</b>
-  
-  --mapa_gerados MAPA_GERADOS, -mg MAPA_GERADOS		mapas gerados. <b>Padrão: 10</b>
-  
-  --rodadas RODADAS, -r RODADAS		rodadas. <b>Padrão: 20</b>
-  
-  --verbosity VERBOSITY, -v VERBOSITY	verbosity logging level (INFO=20 DEBUG=10)
-  
-  --log LOG, -l LOG     arquivo de saída. <b>Padrão: wumpus.txt</b>
-
-# Gráfico Resultante
-Gráfico da pontuação gerada pelos agentes na solução do problema, sendo que haverá um total de agentes de acordo com o parâmetro -r (RODADAS) e -tm (TAMANHO DO MAPA).
-Será plotado pela ordem da pontuação do melhor caso, apresentando o melhor e pior caso, além do caso médio.
+- 1 Gold;
+#### Enviroment
+- Actions:
+    Code | Meaning
+    ---- | ------
+    N    | Move to North
+    S    | Move to South
+    L    | Move to East
+    O    | Move to West
+    P    | Pick up the Gold
+    X    | Shoot East
+    Y    | Shoot West
+    Z    | Shoot North
+    C    | Shoot South
+- **Goal:** Seek for gold, and return to the initial coordinate.
+## Tasks
+[x] Develop the Wumpus Environment.
+[x] Develop an Agent with GA as learning mechanism.
+[x] Implements an Interface for a better understanding of learning process.
+[x] Collect data from agent's efficience.
+[x] Implements Simple Data Visualization.
 
 
 ### License
-BSD 2-Clause "Simplified" License
+
+MIT - <http://www.opensource.org/licenses/mit-license.php>

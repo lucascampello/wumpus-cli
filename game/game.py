@@ -1,3 +1,5 @@
+import timeit
+
 from .gui.screen import Screen
 class Game(object):
     def __init__(self, environment, gui_enabled, agent = None):
@@ -16,18 +18,15 @@ class Game(object):
             self.screen.addWumpus(self.environment.getObjectCoord("wumpus"))
             self.screen.addPits(self.environment.getObjectCoord("pit"))
             self.screen.addGold(self.environment.getObjectCoord("gold"))
-        
+
         while(self.agents):
             if self.gui_enabled: self.screen.updateComponents()
             for agent in self.agents:
-                #self.environment.printMatrix(agent.coordinate)
-                #perceptions = self.environment.getPerceptions(agent.coordinate)
-                #print(perceptions)
-                #agent_action = agent.act(perceptions)
                 agent_action = agent.act()
                 if not agent_action:
                     self.agents.remove(agent)
                     continue
+
 
                 #print(agent.coordinate)
                 #self.screen.updateComponents()

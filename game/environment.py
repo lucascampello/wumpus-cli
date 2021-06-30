@@ -3,13 +3,15 @@ from random import randrange
 
 class Environment(object):
     def __init__(self, dimension:int, n_pits:int, n_golds:int=1, n_wumpus:int=1):
+        # Itens Possíves de Perceber no Mapa
         self.perceptions = {
             "pit": "breeze",
             "gold": "glitter",
             "wumpus": "stench",
         }
-        
+        # Tamanho da largua da matrix
         self.dimension = dimension
+        # Array de Coordenadas dos Elementos do Jogo (Poço | Wumpus | Ouro)
         self.coordinate = {
             "pit":[],
             "wumpus":[],
@@ -20,9 +22,9 @@ class Environment(object):
             self.matrix = [['empty' for column in range(dimension)] for line in range(dimension)]
             self.matrix[0][0] = 'start'
             self.matrix_perceptions = [[ [] for column in range(dimension)] for line in range(dimension)]
-            self.generate({'name': 'pit','amount':n_pits})
-            self.generate({'name': 'gold','amount':n_golds})
-            self.generate({'name': 'wumpus','amount':n_wumpus})
+            self.generate({'name': 'gold','amount':n_golds})        # Gera um Logal para o Ouro
+            self.generate({'name': 'pit','amount':n_pits})          # Gera um local para os poços
+            self.generate({'name': 'wumpus','amount':n_wumpus})     # Gera um local para o Wumpus
             self.screamTrigger = False
             self.n_pits = n_pits
             valid_environment = self.validEnvironment()
@@ -30,10 +32,18 @@ class Environment(object):
 
     def generate(self, obj: dict) -> None:
         for _ in range(obj['amount']):
-            x,y = self.randomCoordinate()
-            self.coordinate[obj["name"]].append((x,y))
+            x = y = 0
+
+            if(obj['name'] == 'gold'):
+                x = self.dimension-1
+                y = self.dimension-1
+            else:
+                self.coordinate[obj["name"]].append((x,y))
+                x,y = self.randomCoordinate()
+
             self.matrix[x][y] = obj['name']
 
+            # Constroi as matrizes de adjascências
             if obj['name'] == 'gold': self.matrix_perceptions[x][y].append(self.perceptions[obj['name']])
             else:
                 # verifica se estar na primeira linha
@@ -153,7 +163,7 @@ class Environment(object):
         self.matrix[x][y] = 'empty'
         self.matrix_perceptions[x][y].remove('glitter')
 
-
+    # Gera uma Coordenada Vazia qualquer de X e Y que não seja (0,0)
     def randomCoordinate(self, )->tuple:
         x,y = (0,0)
         while( ((x,y) == (0,0)) or (self.matrix[x][y] != 'empty') ):
@@ -177,34 +187,34 @@ class Environment(object):
             for j in range(n):
                 cima, baixo, direita, esquerda = (i+1,j), (i-1,j), (i,j+1), (i,j-1)
                 nodes = []
-                if i == 0:
+                if i == 0:      # 1° LINHA
                     if self.matrix[cima[0]][cima[1]] != 'pit': nodes.append(cima)
-                    if j == 0:
+                    if j == 0:           # MAIS A ESQUERDA (apenas testar a direita)
                         if self.matrix[direita[0]][direita[1]] != 'pit': nodes.append(direita)
-                    elif j == n-1:
+                    elif j == n-1:       # MAIS A DIREITA (apenas testar a esquerda)
                         if self.matrix[esquerda[0]][esquerda[1]] != 'pit': nodes.append(esquerda)
-                    else:
+                    else:                # NO MEIO (testar a esquerda e direita)
                         if self.matrix[direita[0]][direita[1]] != 'pit': nodes.append(direita)
                         if self.matrix[esquerda[0]][esquerda[1]] != 'pit': nodes.append(esquerda)
 
-                elif i == n-1:
+                elif i == n-1: # ULTIMA LINHA
                     if self.matrix[baixo[0]][baixo[1]] != 'pit': nodes.append(baixo)
-                    if j == 0:
+                    if j == 0:          # MAIS A ESQUERDA (apenas testar a direita)
                         if self.matrix[direita[0]][direita[1]] != 'pit': nodes.append(direita)
-                    elif j == n-1:
+                    elif j == n-1:      # MAIS A DIREITA (apenas testar a esquerda)
                         if self.matrix[esquerda[0]][esquerda[1]] != 'pit': nodes.append(esquerda)
-                    else:
+                    else:               # NO MEIO (testar a esquerda e direita)
                         if self.matrix[direita[0]][direita[1]] != 'pit': nodes.append(direita)
                         if self.matrix[esquerda[0]][esquerda[1]] != 'pit': nodes.append(esquerda)
                         
-                else:
+                else:        # NAS LINHS DO MEIO (estar CIMA e BAIXO)
                     if self.matrix[baixo[0]][baixo[1]] != 'pit': nodes.append(baixo)
                     if self.matrix[cima[0]][cima[1]] != 'pit': nodes.append(cima)
-                    if j == 0:
+                    if j == 0:          # MAIS A ESQUERDA (apenas testar a direita)
                         if self.matrix[direita[0]][direita[1]] != 'pit': nodes.append(direita)
-                    elif j == n-1:
+                    elif j == n-1:      # MAIS A DIREITA (apenas testar a esquerda)
                         if self.matrix[esquerda[0]][esquerda[1]] != 'pit': nodes.append(esquerda)
-                    else:
+                    else:               # NO MEIO (testar a esquerda e direita)
                         if self.matrix[direita[0]][direita[1]] != 'pit': nodes.append(direita)
                         if self.matrix[esquerda[0]][esquerda[1]] != 'pit': nodes.append(esquerda)
                 grafo.update({(i,j):nodes})

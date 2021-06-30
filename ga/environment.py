@@ -1,5 +1,4 @@
 from random import sample, randrange, random
-import timeit
 import numpy as np
 import matplotlib.pyplot as plt
 from os import path
@@ -21,29 +20,25 @@ class Environment:
         
         
         
-    def start(self,file_log):
+    def start(self):
         self.resetData()
         populations:list = [{"population":self.generateInitialPop(),"best_individual": None} for _ in range(self.amount)]
         for i,pop in enumerate(populations):
             self.evaluate(pop["population"])
             self.findBest(pop)
             if self.graphs_enableds: self.saveFitness(pop["population"], i)
-    
-        for generation in range(1, self.stop_generation ):
-            tempo_inicio = timeit.default_timer()
-            self.shareKnowledge(populations)
-            populations = [{"population": self.reproduce(pop["population"], generation), "best_individual": pop["best_individual"]} for pop in populations]
-            for i,pop in enumerate(populations):
-                self.evaluate(pop["population"], generation, pop["best_individual"])
-                self.findBest(pop)
-                if self.graphs_enableds: self.saveFitness(pop["population"],i)
 
-            tempo_fim = timeit.default_timer()
-            tempo_total = tempo_fim - tempo_inicio
-            file_log.write("  {}  {}     {}   {}\n".format(generation, tempo_inicio, tempo_fim, tempo_total))
+        #for generation in range(1, self.stop_generation):
+        #    self.shareKnowledge(populations)
+        #    populations = [{"population": self.reproduce(pop["population"], generation), "best_individual": pop["best_individual"]} for pop in populations]
+        #    for i,pop in enumerate(populations):
+        #        self.evaluate(pop["population"], generation, pop["best_individual"])
+        #        self.findBest(pop)
+        #        if self.graphs_enableds: self.saveFitness(pop["population"],i)
 
-        self.evaluate([pop["best_individual"] for pop in populations], generation = "x")
-        if self.graphs_enableds: self.showGraph()
+
+        #self.evaluate([pop["best_individual"] for pop in populations], generation = "x")
+        #if self.graphs_enableds: self.showGraph()
         #self.resetData()
 
         return self.best_individual
@@ -180,8 +175,8 @@ class Environment:
                 plt.plot(x,y,label = l)
             plt.title("Execução do Wumpus (Pontuação)")
             plt.legend(loc = "best")
-            plt.xlabel('Mapas Gerados (-mg)')
-            plt.ylabel('Pontuação do Agente')
+            plt.xlabel('Tamanho do Mapa (-tm)')
+            plt.ylabel('Tempo')
             plt.grid(True)
         plt.tight_layout()
         plt.show()
